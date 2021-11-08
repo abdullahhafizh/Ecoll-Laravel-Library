@@ -49,12 +49,13 @@ class Client
         return PaycodeGenerator::post($this->config, $params);
     }
 
-    public function checkStatus($params)
+    public function checkStatus($trx_id)
     {
         $this->config = $this->getConfig();
         $params = array_merge([
             'type' => 'inquirybilling',
-            'client_id' => env('ECOLL_CLIENT')
+            'client_id' => env('ECOLL_CLIENT'),
+            'trx_id' => $trx_id
         ], $params);
         return PaycodeGenerator::post($this->config, $params);
     }
