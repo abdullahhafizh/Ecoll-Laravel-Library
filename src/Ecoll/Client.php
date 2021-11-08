@@ -46,7 +46,7 @@ class Client
             'type' => 'createbilling',
             'client_id' => env('ECOLL_CLIENT')
         ], $params);
-        return PaycodeGenerator::generated($this->config, $params);
+        return PaycodeGenerator::post($this->config, $params);
     }
 
     public function getStatusVa($params)
@@ -56,6 +56,6 @@ class Client
             'type' => 'inquirybilling',
             'client_id' => env('ECOLL_CLIENT')
         ], $params);
-        return PaycodeGenerator::generated($this->config, $params);
+        return PaycodeGenerator::post($this->config, $params);
     }
 }
