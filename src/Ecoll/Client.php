@@ -49,7 +49,7 @@ class Client
         return PaycodeGenerator::post($this->config, $params);
     }
 
-    public function getStatusVa($params)
+    public function checkStatus($params)
     {
         $this->config = $this->getConfig();
         $params = array_merge([
