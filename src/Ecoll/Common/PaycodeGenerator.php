@@ -7,7 +7,7 @@ use Ecoll\Common\Config;
 
 class PaycodeGenerator
 {
-    public static function post($config, $params, $type = 'virtual_account')
+    public static function post($config, $params)
     {
         $client_id = $config['client_id'];
         $secret_key = $config['shared_key'];
@@ -27,17 +27,17 @@ class PaycodeGenerator
         );
 
         $response = self::get_content($url, json_encode($data));
-        $response_json = json_decode($response, true);
+        $response_json = json_decode($response);
 
         $log = PHP_EOL . 'HIT BNI ECOLL: '. $url;
         $log .= PHP_EOL . 'REQUEST: '. json_encode($data, JSON_PRETTY_PRINT);
         $log .= PHP_EOL . 'RESPONSE: '. json_encode($response_json, JSON_PRETTY_PRINT);
         \Log::info($log);
 
-        if ($response_json['status'] !== '000') var_dump($response_json);
+        if ($response_json->status !== '000') return $response_json;
 
-        $data_response = BniEnc::decrypt($response_json['data'], $client_id, $secret_key);
-        var_dump($data_response);
+        $data_response = BniEnc::decrypt($response_json->data, $client_id, $secret_key);
+        return $data_response;
     }
 
     private static function get_content($url, $post = '') {

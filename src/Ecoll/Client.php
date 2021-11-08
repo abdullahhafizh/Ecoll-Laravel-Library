@@ -2,7 +2,7 @@
 
 namespace Ecoll;
 
-use Ecoll\Service\CreateVa;
+use Ecoll\Common\PaycodeGenerator;
 
 class Client
 {
@@ -42,6 +42,14 @@ class Client
     public function generateVa($params)
     {
         $this->config = $this->getConfig();
-        return CreateVa::generated($this->config, $params);
+        $params = array_merge(['type' => 'createbilling'], $params);
+        return PaycodeGenerator::generated($this->config, $params);
+    }
+
+    public function getStatusVa($params)
+    {
+        $this->config = $this->getConfig();
+        $params = array_merge(['type' => 'inquirybilling'], $params);
+        return PaycodeGenerator::generated($this->config, $params);
     }
 }

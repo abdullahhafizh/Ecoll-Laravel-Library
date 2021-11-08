@@ -14,7 +14,7 @@ class BniEnc
         $parsed_string = self::doubleDecrypt($hased_string, $cid, $secret);
         list($timestamp, $data) = array_pad(explode('.', $parsed_string, 2), 2, null);
         if (self::tsDiff(strrev($timestamp)) === true) {
-            return json_decode($data, true);
+            return json_decode($data);
         }
         return null;
     }
