@@ -26,8 +26,13 @@ class PaycodeGenerator
             'data' => $hashed_string,
         );
 
-        $response = get_content($url, json_encode($data));
+        $response = self::get_content($url, json_encode($data));
         $response_json = json_decode($response, true);
+
+        $log = PHP_EOL . 'HIT BNI ECOLL: '. $url;
+        $log .= PHP_EOL . 'REQUEST: '. json_encode($data, JSON_PRETTY_PRINT);
+        $log .= PHP_EOL . 'RESPONSE: '. json_encode($response_json, JSON_PRETTY_PRINT);
+        \Log::info($log);
 
         if ($response_json['status'] !== '000') var_dump($response_json);
 
@@ -35,7 +40,7 @@ class PaycodeGenerator
         var_dump($data_response);
     }
 
-    function get_content($url, $post = '') {
+    private static function get_content($url, $post = '') {
         $header[] = 'Content-Type: application/json';
         $header[] = "Accept-Encoding: gzip, deflate";
         $header[] = "Cache-Control: max-age=0";
