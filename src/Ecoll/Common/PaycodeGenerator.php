@@ -37,6 +37,7 @@ class PaycodeGenerator
         if ($response_json->status !== '000') return $response_json;
 
         $data_response = BniEnc::decrypt($response_json->data, $client_id, $secret_key);
+        \Log::info('DECRYPTED RESPONSE: ' . json_encode($data_response, JSON_PRETTY_PRINT));
         return $data_response;
     }
 
