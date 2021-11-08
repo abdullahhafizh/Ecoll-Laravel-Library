@@ -42,14 +42,20 @@ class Client
     public function generateVa($params)
     {
         $this->config = $this->getConfig();
-        $params = array_merge(['type' => 'createbilling'], $params);
+        $params = array_merge([
+            'type' => 'createbilling',
+            'client_id' => env('ECOLL_CLIENT')
+        ], $params);
         return PaycodeGenerator::generated($this->config, $params);
     }
 
     public function getStatusVa($params)
     {
         $this->config = $this->getConfig();
-        $params = array_merge(['type' => 'inquirybilling'], $params);
+        $params = array_merge([
+            'type' => 'inquirybilling',
+            'client_id' => env('ECOLL_CLIENT')
+        ], $params);
         return PaycodeGenerator::generated($this->config, $params);
     }
 }
