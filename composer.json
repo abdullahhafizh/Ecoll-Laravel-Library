@@ -1,0 +1,17 @@
+{
+    "name": "abdullahhafizh/ecoll-laravel-library",
+    "type": "library",
+    "description": "Ecoll Laravel Library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Abdullahhafizh",
+            "email": "abdllhhafizh@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {"Ecoll\\": "src/Ecoll/"}
+    },
+    "require": {}
+}
