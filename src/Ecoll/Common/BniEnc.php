@@ -20,7 +20,7 @@ class BniEnc
     }
 
     private static function tsDiff($ts) {
-        return abs($ts - time()) <= self::TIME_DIFF_LIMIT;
+        return abs((int)$ts - time()) <= self::TIME_DIFF_LIMIT;
     }
 
     private static function doubleEncrypt($string, $cid, $secret) {
