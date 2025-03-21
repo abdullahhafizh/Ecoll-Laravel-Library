@@ -15,6 +15,8 @@ class PaycodeGenerator
 
         $data_asli = $params;
 
+        \Log::info('DATA ASLI: ' . json_encode($data_asli, JSON_UNESCAPED_SLASHES));
+
         $hashed_string = BniEnc::encrypt(
             $data_asli,
             $client_id,
@@ -30,14 +32,14 @@ class PaycodeGenerator
         $response_json = json_decode($response);
 
         $log = PHP_EOL . 'HIT BNI ECOLL: '. $url;
-        $log .= PHP_EOL . 'REQUEST: '. json_encode($data, JSON_PRETTY_PRINT);
-        $log .= PHP_EOL . 'RESPONSE: '. json_encode($response_json, JSON_PRETTY_PRINT);
+        $log .= PHP_EOL . 'REQUEST: '. json_encode($data, JSON_UNESCAPED_SLASHES);
+        $log .= PHP_EOL . 'RESPONSE: '. json_encode($response_json, JSON_UNESCAPED_SLASHES);
         \Log::info($log);
 
         if ($response_json->status !== '000') return $response_json;
 
         $data_response = BniEnc::decrypt($response_json->data, $client_id, $secret_key);
-        \Log::info('DECRYPTED RESPONSE: ' . json_encode($data_response, JSON_PRETTY_PRINT));
+        \Log::info('DECRYPTED RESPONSE: ' . json_encode($data_response, JSON_UNESCAPED_SLASHES));
         return $data_response;
     }
 
